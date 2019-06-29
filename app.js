@@ -81,6 +81,46 @@ app.post("/nouveau-livre", (req, res) => {
         });
 });
 
+app.use('/les-livres', (req, res, next) => {
+    Livre.find().then( /* returns a promise */
+	(livres) => {
+	 // var title = (livres[0]).titreLivre;
+	    console.log('nombre de livres',livres.length);
+	    for (var i = 0, l = livres.length; i < l; i++) {
+		un_livre = livres[i];
+		console.log('------------------------------');
+		console.log('Titre : ' + un_livre.titreLivre);
+	    }
+/* res.status(200).json(livres); */
+	}
+    ).catch(
+	(error) => {
+	    res.status(400).json({
+		error: error
+	    });
+	}
+    );
+//  next();
+});
+
+app.get('/les-livres', (req, res) => {
+    res.sendFile(__dirname + "/les-livres.html");
+});
+
+app.delete("/les-livres/:id", (req, res, next) => {
+    Livre.delete({_id:req.params.id})
+	.then (
+	    () => {
+	    }
+	).catch(
+	    (error) => {
+		res.status(400).json({
+		    error: error
+		});
+	    }
+	);
+});
+
 app.listen(port_server, () => {
     console.log("Server listening on port http://localhost:" + port_server);
 });
