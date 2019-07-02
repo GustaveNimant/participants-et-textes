@@ -16,6 +16,9 @@ const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
 mongoose.connect("mongodb://localhost:" + port_db + "/" + name_db, { useNewUrlParser: true });
 
+const db = mongoose.connection;
+console.log('app.get db', db);
+
 app.get ('/', (req, res) => {
     console.log('app.get req.session is', req.session);
     res.render ('pages/index');

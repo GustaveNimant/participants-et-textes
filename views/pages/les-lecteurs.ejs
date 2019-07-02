@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Les lecteurs</title>
+    </head>
+
+    <body>
+        <h1><%= title_page %></h1>
+	<ul>
+	    <% lecteurs.forEach(function (un_lecteur) {%>
+		<li><%= un_lecteur.email %></li>
+	    <% }); %>
+	</ul>
+    </body>
+</html>
