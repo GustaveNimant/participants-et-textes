@@ -2,51 +2,51 @@ const express = require("express");
 const app = express();
 
 const port_server = 3000;
-const name_db = "node-demo-db";
+const name_db = "lecteurs-et-livres-db";
 const port_db = 27017;
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// Moteur de template
+app.set ('view engine', 'ejs');
+
 const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
-mongoose.connect("mongodb://localhost:" + port_db + "/" + name_db);
+mongoose.connect("mongodb://localhost:" + port_db + "/" + name_db, { useNewUrlParser: true });
 
-app.get("/", (req, res) => {
-    res.sendFile(__dirname + "/index.html");
+app.get ('/', (req, res) => {
+    console.log('app.get req.session is', req.session);
+    res.render ('pages/index');
 });
 
-const inscriptionSchema = new mongoose.Schema({
-    email: String,
-    pseudo: String,
-    password : String
-});
+const lecteurModel = require('./backend/models/lecteurModel');
 
-const Lecteur = mongoose.model("Lecteur", inscriptionSchema);
-
-app.get("/inscription", (req, res) => {
+app.get("/nouvelle-inscription", (req, res) => {
     res.sendFile(__dirname + "/inscription.html");
 });
 
 app.post("/nouveau-lecteur", (req, res) => {
-    var myData = new Lecteur(req.body);
-    myData.save()
+    var nouveauLecteur = new lecteurModel(req.body);
+    nouveauLecteur.save()
         .then(item => {
-            res.send('Inscription OK <a href="/">Retour a l\'accueil</a>');
+            res.send('Inscription effectuée <a href="/">Retour a l\'accueil</a>');
         })
         .catch(err => {
-            res.status(400).send("Unable to save to database");
+            res.status(400).send("Impossible d'enregistrer le nouveau lecteur dans la database");
         });
 });
 
 app.get("/un-lecteur", (req, res) => {
+    console.log('un-lecteur req.body', req.body);
     res.sendFile(__dirname + "/un-lecteur.html");
 });
 
-const inscriptionModel = mongoose.model('Lecteur', inscriptionSchema);
+//const lecteurModel = mongoose.model('lecteurModel', lecteurSchema);
 
-const query = inscriptionModel.find();
+const query = lecteurModel.find();
+console.log('query', query);
 query.where('pseudo', 'Julien');
 query.limit(3);
 
@@ -63,26 +63,21 @@ query.exec(function (err, the_inscriptions) {
     }
 });
 
-const livreSchema = new mongoose.Schema({
-    titreLivre: String,
-    auteurLivre: String
-});
-
-const Livre = mongoose.model("Livre", livreSchema);
+const livreModel = require('./backend/models/livreModel');
 
 app.post("/nouveau-livre", (req, res) => {
-    var myData = new Livre(req.body);
-    myData.save()
+    var nouveauLivre = new livreModel(req.body);
+    nouveauLivre.save()
         .then(item => {
-            res.send('Name saved to database <a href="/">Retour a l\'accueil</a>');
+            res.send('Nouveau livre enregistré dans la base de données <a href="/">Retour a l\'accueil</a>');
         })
         .catch(err => {
-            res.status(400).send("Unable to save to database");
+	    res.status(400).send("Impossible d'enregistrer le nouveau livre dans la base de données");
         });
 });
 
 app.use('/les-livres', (req, res, next) => {
-    Livre.find().then( /* returns a promise */
+    livreModel.find().then( /* returns a promise */
 	(livres) => {
 	 // var title = (livres[0]).titreLivre;
 	    console.log('nombre de livres',livres.length);
@@ -104,11 +99,11 @@ app.use('/les-livres', (req, res, next) => {
 });
 
 app.get('/les-livres', (req, res) => {
-    res.sendFile(__dirname + "/les-livres.html");
+    res.render("/les-livres");
 });
 
 app.delete("/les-livres/:id", (req, res, next) => {
-    Livre.delete({_id:req.params.id})
+    livreModel.delete({_id:req.params.id})
 	.then (
 	    () => {
 	    }
