@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Les livres</title>
+        <title><%= title_tag %></title>
     </head>
 
     <body>
-        <h1>Les livres</h1>
+        <h1><%= title_page %></h1>
+	<ul>
+	    <% livres.forEach(function (un_livre) {%>
+		<li><%= un_livre.titreLivre %> par <%= un_livre.auteurLivre %></li>
+	    <% }); %>
+	</ul>
     </body>
 </html>

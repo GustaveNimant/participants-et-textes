@@ -22,32 +22,31 @@ app.get ('/', (req, res) => {
     res.render ('pages/index');
 });
 
-const lecteurModel = require('./backend/models/lecteurModel');
+const livreModel = require('./backend/models/livreModel');
 
-const lecteurs_query = lecteurModel.find();
+const livres_query = livreModel.find();
 
-var lecteur_list = [
+var livre_list = [
     {
-	email: "a@b",
-	pseudo: "bla",
-	password: "truc"
+	titreLivre: "",
+	auteurLivre: ""
     }
 ];
      
-lecteurs_query.exec(function (err, les_lecteurs) {
+livres_query.exec(function (err, les_livres) {
     if (err) { throw err; }
-    var un_lecteur;
-    console.log('length',les_lecteurs.length);
+    var un_livre;
+    console.log('length', les_livres.length);
 
-    lecteur_list = les_lecteurs; 
+    livre_list = les_livres; 
  });
 
-app.get("/Les-lecteurs", function (req, res) {
-    var title_tag = "Les lecteurs";
-    var title_page = "La liste des lecteurs";
-    res.render('pages/les-lecteurs',
+app.get("/Les-livres", function (req, res) {
+    var title_tag = "Les livres";
+    var title_page = "La liste des livres";
+    res.render('pages/les-livres',
 	       {
-		   lecteurs : lecteur_list,
+		   livres : livre_list,
 		   title_tag: title_tag,
 		   title_page: title_page
 	       }
