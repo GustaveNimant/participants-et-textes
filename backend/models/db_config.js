@@ -1,5 +1,5 @@
-const    name_db = "lecteurs-et-livres-db";
-const    port_db = 27017;
+const name_db = "lecteurs-et-livres-db";
+const port_db = 27017;
 
 module.exports = {
     DB_URI : 'mongodb://localhost:'+ port_db + '/' + name_db,

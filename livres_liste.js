@@ -6,6 +6,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.set ('view engine', 'ejs');
+
 const router = express.Router();
 
 const db_config = require('./backend/models/db_config');
@@ -30,18 +31,7 @@ router.get ('/', (req, res) => {
 app.use('/', router);
 
 const livreModel = require('./backend/models/livreModel');
-
 const livres_query = livreModel.find();
-
-var livre_list = new Array ();
-     
-livres_query.exec(function (err, les_livres) {
-    if (err) { throw err; }
-    var un_livre;
-    console.log('length', les_livres.length);
-
-    livre_list = les_livres; 
- });
 
 var getAllBooks = (req, res, next) => {
     const title_tag = "Les livres";
@@ -56,7 +46,8 @@ var getAllBooks = (req, res, next) => {
 			       title_tag: title_tag,
 			       title_page: title_page
 			   }
-			  )
+			  );
+		next();
 	    }
 	).catch(
 	    (error) => {
@@ -68,8 +59,6 @@ var getAllBooks = (req, res, next) => {
 }
 
 router.get("/Les-livres", getAllBooks);
-
-app.use("/Les_Livres", router);
 
 app.listen(port_server, () => {
     console.log("Server listening on port http://localhost:" + port_server);
