@@ -6,6 +6,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.set ('view engine', 'ejs');
+const router = express.Router();
 
 const db_config = require('./backend/models/db_config');
 const port_server = db_config.SERVER_PORT;
@@ -22,9 +23,11 @@ mongoose.connect(db_config.DB_URI, { useNewUrlParser: true })
 	console.error(error);
     });
 
-app.get ('/', (req, res) => {
+router.get ('/', (req, res) => {
     res.render ('pages/index');
 });
+
+app.use('/', router);
 
 const livreModel = require('./backend/models/livreModel');
 
@@ -40,18 +43,33 @@ livres_query.exec(function (err, les_livres) {
     livre_list = les_livres; 
  });
 
-app.get("/Les-livres", function (req, res) {
-    var title_tag = "Les livres";
-    var title_page = "La liste des livres";
+var getAllBooks = (req, res, next) => {
+    const title_tag = "Les livres";
+    const title_page = "La liste des livres";
     
-    res.render('pages/les-livres',
-	       {
-		   livres : livre_list,
-		   title_tag: title_tag,
-		   title_page: title_page
-	       }
-	      )
-});
+    livreModel.find()
+	.then (
+	    (livre_list) => {
+		res.render('pages/les-livres',
+			   {
+			       livres : livre_list,
+			       title_tag: title_tag,
+			       title_page: title_page
+			   }
+			  )
+	    }
+	).catch(
+	    (error) => {
+		res.status(400).json({
+		    error: error
+		});
+	    }
+	);
+}
+
+router.get("/Les-livres", getAllBooks);
+
+app.use("/Les_Livres", router);
 
 app.listen(port_server, () => {
     console.log("Server listening on port http://localhost:" + port_server);
