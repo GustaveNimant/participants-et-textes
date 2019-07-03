@@ -26,13 +26,7 @@ const lecteurModel = require('./backend/models/lecteurModel');
 
 const lecteurs_query = lecteurModel.find();
 
-var lecteur_list = [
-    {
-	email: "a@b",
-	pseudo: "bla",
-	password: "truc"
-    }
-];
+var lecteur_list = new Array ();
      
 lecteurs_query.exec(function (err, les_lecteurs) {
     if (err) { throw err; }
