@@ -53,7 +53,7 @@ router.get('/Un-lecteur/:pseudo', function(req, res) {
     }).then(
 	(a_reader) => {
 	    console.log('a_reader is', a_reader);
-	    res.render('pages/un-lecteur',
+	    res.render('pages/un-lecteur-get',
 		       {
 			   un_lecteur : a_reader,
 			   title_tag: "Un lecteur",
