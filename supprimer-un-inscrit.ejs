@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <% include ../partials/head %>
+        <title>Delete</title>
+    </head>
+
+  <body class="container">
+    <header>
+    <% include ../partials/header %>
+</header>
+
+    <h1>Supprimer un membre</h1>
+
+    <script>
+      function $_GET(param) {
+      var vars = {};
+      window.location.href.replace( location.hash, '' ).replace( 
+      /[?&]+([^=&]+)=?([^&]*)?/gi, // regexp
+      function( m, key, value ) { // callback
+      vars[key] = value !== undefined ? value : '';
+      }
+      );
+      
+      if ( param ) {
+      return vars[param] ? vars[param] : null;	
+      }
+      return vars;
+      }
+      
+    </script>
+    <script>
+      var deleted = $_GET['deleted'];
+    </script>
+    
+
+    <% if (deleted == 'OK') { %>
+    OK
+    <% } %>
+        <form method="post" action="/supprimer-un-inscrit">
+          <table><tr>
+	      <td COLSPAN="2" align="middle">
+		<select name="email">
+
+		  <% inscrits.forEach(function(inscrits) { %>
+		  <option><%= inscrits.email %>
+		  <% }); %>
+		  </select>
+	      </td>
+	      </tr><tr>
+	    </tr><tr>
+	<td COLSPAN="2" align="middle"><br><input type="submit" value="Delete"></td></tr>
+		</table>
+        </form>
+    </body>
+</html>
+
