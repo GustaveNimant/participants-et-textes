@@ -1,52 +1,36 @@
 const express = require("express");
 const app = express();
 
-const port_server = 3000;
-const name_db = "lecteurs-et-livres-db";
-const port_db = 27017;
-
-const bodyParser = require('body-parser');
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
-// Moteur de template
 app.set ('view engine', 'ejs');
+
+const router = express.Router();
+
+const db_config = require('./backend/models/db_config');
+const port_server = db_config.SERVER_PORT;
 
 const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
-mongoose.connect("mongodb://localhost:" + port_db + "/" + name_db, { useNewUrlParser: true });
 
-const db = mongoose.connection;
+const DB_URI = mongoose.connect(db_config.DB_URI, { useNewUrlParser: true })
+    .then(
+	() => {console.log('Database is connected to Uri', DB_URI)}
+    )
+    .catch ((error) => {
+	console.log('Can not connect to the database');
+	console.error(error);
+    });
 
-app.get ('/', (req, res) => {
+/* Acceuil */
+app.use('/', router);
+
+router.get ('/', (req, res) => {
     res.render ('pages/index');
 });
 
-const lecteurModel = require('./backend/models/lecteurModel');
+/* Les lecteurs */
+const readersRoute = require('./backend/routes/lecteurs.route')
 
-const lecteurs_query = lecteurModel.find();
-
-var lecteur_list = new Array ();
-     
-lecteurs_query.exec(function (err, les_lecteurs) {
-    if (err) { throw err; }
-    var un_lecteur;
-    console.log('length',les_lecteurs.length);
-
-    lecteur_list = les_lecteurs; 
- });
-
-app.get("/Les-lecteurs", function (req, res) {
-    var title_tag = "Les lecteurs";
-    var title_page = "La liste des lecteurs";
-    res.render('pages/les-lecteurs',
-	       {
-		   lecteurs : lecteur_list,
-		   title_tag: title_tag,
-		   title_page: title_page
-	       }
-	      )
-});
+router.get("/Les-lecteurs", readersRoute);
 
 app.listen(port_server, () => {
     console.log("Server listening on port http://localhost:" + port_server);

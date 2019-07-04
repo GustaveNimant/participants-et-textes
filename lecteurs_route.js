@@ -24,14 +24,6 @@ router.get ('/', (req, res) => {
 
 app.use('/', router);
 
-const Schema = mongoose.Schema;
-
-const lecteurSchema = new Schema({
-    email: { type: String },
-    pseudo: { type: String },
-    password: { type: String }
-});
-
 const readersRoute = require('./backend/routes/lecteurs.route')
 
 router.get("/Les-lecteurs", readersRoute);

@@ -37,6 +37,9 @@ const booksRoute = require('./backend/routes/livres.route')
 
 router.get("/Les-livres", booksRoute);
 
+const readerRoute = require('./backend/routes/lecteur.route')
+router.get("/un-lecteur/:id", readerRoute);
+
 app.listen(port_server, () => {
     console.log("Server listening on port http://localhost:" + port_server);
 });
