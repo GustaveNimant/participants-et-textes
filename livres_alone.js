@@ -8,8 +8,8 @@ const port_server = 3000;
 
 const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
-
-const DB_URI = mongoose.connect('mongodb://localhost:27017/livres-db', { useNewUrlParser: true })
+const DB_URI = 'mongodb://localhost:27017/livres-db'
+const Db_Promise = mongoose.connect(DB_URI, { useNewUrlParser: true })
     .then(
 	() => {console.log('Database is connected to Uri', DB_URI)}
     )

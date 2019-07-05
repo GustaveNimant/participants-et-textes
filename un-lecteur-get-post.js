@@ -13,9 +13,9 @@ const port_server = db_config.SERVER_PORT;
 const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
 
-const DB_URI = mongoose.connect(db_config.DB_URI, { useNewUrlParser: true })
+const Db_Promise = mongoose.connect(db_config.DB_URI, { useNewUrlParser: true })
     .then(
-	() => {console.log('Database is connected to Uri', DB_URI)}
+	() => {console.log('Database is connected to Uri', db_config.DB_URI)}
     )
     .catch ((error) => {
 	console.log('Can not connect to the database');
@@ -42,8 +42,28 @@ router.get('/Un-lecteur', function(req, res) {
 
 router.post('/Un-lecteur-post', function(req, res) {
     const pseudo = req.body.pseudo;
-    console.log('Le pseudo est ' + pseudo + '!');
-    console.log('body ' + req.body);
+    console.log('Le pseudo est ', pseudo, '!');
+  
+    lecteurModel.findOne({
+	pseudo: pseudo
+    }).then(
+	(a_reader) => {
+	    console.log('a_reader is', a_reader);
+	    res.render('pages/un-lecteur-get',
+		       {
+			   un_lecteur : a_reader,
+			   title_tag: "Un lecteur",
+			   title_page: "Les coordonnées d'un lecteur"
+		       }
+		      )
+	}
+    ).catch(
+	(error) => {
+	    res.status(404).json({
+		error: error
+	    });
+	}
+    );
 });
 	    
 // route middleware to validate :pseudo
@@ -79,6 +99,9 @@ router.get('/Un-lecteur/:pseudo', function(req, res) {
 	}
     );
 });
+const readersRoute = require('./backend/routes/lecteurs.route')
+
+router.get("/Les-lecteurs", readersRoute);
 
 // apply the routes to our application
 app.use('/', router);
