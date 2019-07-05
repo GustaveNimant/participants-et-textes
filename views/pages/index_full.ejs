@@ -5,14 +5,16 @@
     </head>
 
     <body>
-	<a href="nouvelle-inscription">Inscription d'un nouveau lecteur</a></br>
-	<a href="un-lecteur">Un lecteur</a></br>
-	<a href="Les-lecteurs">La liste des lecteurs</a></br>
-	<a href="Les-livres">Les livres</a></br>
-        <h1>Introduction à Node et MongoDB</h1>
-	
+	<h1>Lecteurs et livres</h1>
+	<ul>	
+	<li><a href="nouvelle-inscription">Inscription d'un nouveau lecteur</a></li>
+	<li><a href="Un-lecteur">Un lecteur</a></li>
+	<li><a href="Les-lecteurs">La liste des lecteurs</a></li>
+	<li><a href="Les-livres">La liste des livres</a></li>
+	</ul>
+	<h3>Entrer un nouveau livre</h3>
+
         <form method="post" action="/nouveau-livre">
-            <label>Entrer un nouveau livre</label><br>
             <input type="text" name="titreLivre" placeholder="Entrer le titre..." required>
             <input type="text" name="auteurLivre" placeholder="Entrer l'auteur..." required>
             <input type="submit" value="Ajouter">

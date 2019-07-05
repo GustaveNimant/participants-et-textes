@@ -1,18 +1,34 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Node et MongoDB</title>
+        <title>Bibliothèque</title>
     </head>
 
     <body>
-	<a href="nouvelle-inscription">Inscription d'un nouveau lecteur</a></br>
-	<a href="Un-lecteur">Un lecteur</a></br>
-	<a href="Les-lecteurs">La liste des lecteurs</a></br>
-	<a href="Les-livres">La liste des livres</a></br>
-        <h1>Introduction à Node et MongoDB</h1>
-	
+	<h1>Les lecteurs</h1>
+	<ul>	
+	    <li><a href="Un-lecteur">Un lecteur</a></li>
+	    <li><a href="Les-lecteurs">La liste des lecteurs</a></li>
+	</ul>
+
+	<h3>Entrer un nouveau lecteur</h3>
+
+        <form method="post" action="/nouveau-lecteur">
+            <input type="text" name="pseudoLecteur" placeholder="Entrer le pseudo ..." required>
+            <input type="text" name="emailLecteur" placeholder="Entrer l'adresse mail ..." required>
+	    <input type="text" name="passwordLecteur" placeholder="Entrer le mot de passe ..." required>
+            <input type="submit" value="Ajouter">
+        </form>
+
+	<h1>Les livres</h1>
+	<ul>	
+	    <li><a href="Un-livre">Un livre</a></li>
+	    <li><a href="Les-livres">La liste des livres</a></li>
+	</ul>
+
+	<h3>Entrer un nouveau livre</h3>
+
         <form method="post" action="/nouveau-livre">
-            <label>Entrer un nouveau livre</label><br>
             <input type="text" name="titreLivre" placeholder="Entrer le titre..." required>
             <input type="text" name="auteurLivre" placeholder="Entrer l'auteur..." required>
             <input type="submit" value="Ajouter">
