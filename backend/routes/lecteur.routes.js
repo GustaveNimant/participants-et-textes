@@ -9,7 +9,6 @@ router.use(function(req, res, next) {
     next(); 
 });
 
-
 router.get ('/', lecteurCtrl.mainMenu);
 router.get('/Les-lecteurs', lecteurCtrl.getAllReader);
 router.get('/Un-lecteur', lecteurCtrl.getAReader);
