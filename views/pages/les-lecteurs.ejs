@@ -9,9 +9,10 @@
 	<ul>
 	    <% lecteurs.forEach(function (un_lecteur) {%>
 		<li>
-		    <%= un_lecteur.emailLecteur %>
 		    Pseudo 
 		    "<%= un_lecteur.pseudoLecteur %>"
+		    Email
+		    "<%= un_lecteur.emailLecteur %>"
 		</li>
 	    <% }); %>
 	</ul>

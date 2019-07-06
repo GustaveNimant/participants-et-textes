@@ -61,78 +61,90 @@ router.post('/nouveau-lecteur', (req, res) => {
 });
 
 router.get('/Un-lecteur', function(req, res) {
+    console.log('/Un-lecteur req.body est ', req.body);
     res.render ('pages/un-lecteur-post');
 });
 
 router.post('/Un-lecteur-post', function(req, res) {
-    const pseudo = req.body.pseudo;
-    console.log('Le pseudo est ', pseudo, '!');
+    const pseudo = req.body.pseudoLecteur;
+    console.log('1 req.body est ', req.body);
+    console.log('1 Le pseudo est ', pseudo, '!');
   
     lecteurModel.findOne({
-	pseudo: pseudo
+	pseudoLecteur: pseudo
     }).then(
 	(a_reader) => {
-	    console.log('a_reader is', a_reader);
-	    res.render('pages/un-lecteur-get',
-		       {
-			   un_lecteur : a_reader,
-			   title_tag: "Un lecteur",
-			   title_page: "Les coordonnées d'un lecteur"
-		       }
-		      )
+	    console.log('1 a_reader is', a_reader);
+	    if (a_reader) {
+		res.render('pages/un-lecteur-get',
+			   {
+			       un_lecteur : a_reader,
+			       title_tag: "Un lecteur",
+			       title_page: "Les coordonnées d'un lecteur"
+			   }
+			  )
+		// res.end ();
+	    }
+	    else {
+		res.send('Le lecteur de pseudo '+ req.body.pseudoLecteur + ' n\'existe pas dans la base de données <br><br><a href="/">Retour a l\'accueil</a>');
+	    }
 	}
-    ).catch(
-	(error) => {
-	    res.status(404).json({
-		error: error
+	).catch(
+	    (error) => {
+		res.status(404).json({
+		    error: error
 	    });
-	}
-    );
-});
-	    
-// route middleware to validate :pseudo
-router.param('pseudo', function(req, res, next, pseudo) {
-    console.log('pseudo est ' + pseudo);
-    req.pseudo = pseudo;
-    next(); 
+	    }
+	);
+    });
+
+router.get('/Un-livre', function(req, res) {
+    console.log('/Un-livre req.body est ', req.body);
+    res.render ('pages/un-livre-post');
 });
 
-router.get('/Ici/:pseudo', function(req, res) {
-    res.send('Le pseudo est ' + req.pseudo + '!');
-});
-
-router.get('/Un-lecteur/:pseudo', function(req, res) {
-    lecteurModel.findOne({
-	pseudo: req.pseudo
+router.post('/Un-livre-post', function(req, res) {
+    const titre = req.body.titreLivre;
+    console.log('req.body est ', req.body);
+    console.log('Le titre est ', titre, '!');
+  
+    livreModel.findOne({
+	titreLivre: titre
     }).then(
-	(a_reader) => {
-	    console.log('a_reader is', a_reader);
-	    res.render('pages/un-lecteur-get',
-		       {
-			   un_lecteur : a_reader,
-			   title_tag: "Un lecteur",
-			   title_page: "Les coordonnées d'un lecteur"
-		       }
-		      )
+	(a_book) => {
+	    console.log('a_book is', a_book);
+	    if (a_book) {
+		res.render('pages/un-livre-get',
+			   {
+			       un_livre : a_book,
+			       title_tag: "Un livre",
+			       title_page: "Les coordonnées d'un livre"
+			   }
+			  )
+		// res.end ();
+	    }
+	    else {
+		res.send('Le livre de titre '+ req.body.titreLivre + ' n\'existe pas dans la base de données <br><br><a href="/">Retour a l\'accueil</a>');
+	    }
 	}
-    ).catch(
-	(error) => {
-	    res.status(404).json({
-		error: error
+	).catch(
+	    (error) => {
+		res.status(404).json({
+		    error: error
 	    });
-	}
-    );
-});
+	    }
+	);
+    });
 
 /* Lecteurs */
-const readersRoute = require('./backend/routes/lecteurs.route')
+const lecteursRoute = require('./backend/routes/lecteurs.route')
 
-router.get("/Les-lecteurs", readersRoute);
+router.get("/Les-lecteurs", lecteursRoute);
 
 /* Livres */
-const booksRoute = require('./backend/routes/livres.route')
+const livresRoute = require('./backend/routes/livres.route')
 
-router.get("/Les-livres", booksRoute);
+router.get("/Les-livres", livresRoute);
 
 // apply the routes to our application
 app.use('/', router);

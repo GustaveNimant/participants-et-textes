@@ -18,7 +18,7 @@ app.get('/Un-lecteur', function(req, res) {
 });
 
 app.post('/Un-lecteur-post', function(req, res) {
-    const pseudo = req.body.pseudo;
+    const pseudo = req.body.pseudoLecteur;
     console.log('Le pseudo est ' + pseudo + '!');
 });
 	    
