@@ -11,8 +11,8 @@ let getOneReader = (req, res, next) => {
 	    res.render('pages/un-lecteur',
 		       {
 			   lecteur : lecteur,
-			   title_tag: "Un lecteur" ,
-			   title_page: "Un lecteur"
+			   title_tag: "Un lecteur",
+			   title_page: "Coordonnées d'un lecteur"
 		       }
 		      );
 	    next();
