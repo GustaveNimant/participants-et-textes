@@ -12,7 +12,7 @@ router.use(function(req, res, next) {
 
 router.get ('/', lecteurCtrl.mainMenu);
 router.get('/Les-lecteurs', lecteurCtrl.getAllReader);
-router.post('/Un-lecteur', lecteurCtrl.getOneReader);
+router.get('/Un-lecteur', lecteurCtrl.getAReader);
 router.post('/Un-lecteur-post', lecteurCtrl.getOneReader);
 router.post('/nouveau-lecteur', lecteurCtrl.createReader);
 

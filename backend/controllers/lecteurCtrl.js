@@ -22,22 +22,32 @@ exports.getAReader = (req, res, next) => {
 };
     
 exports.getOneReader = (req, res, next) => {
+    const pseudo = req.body.pseudoLecteur;
+    console.log('getOneReader req.body est ', req.body);
+    console.log('getOneReader Le pseudo est ', pseudo, '!');
+    
     lecteurModel.findOne({
-	_id:req.params.id
-    }).then (
-	(lecteur) => {
-	    res.render('pages/un-lecteur',
-		       {
-			   lecteur : lecteur,
-			   title_tag: "Un lecteur",
-			   title_page: "Coordonnées d'un lecteur"
-		       }
-		      );
-	    next();
+	pseudoLecteur: pseudo
+    }).then(
+	(a_reader) => {
+	    console.log('1 a_reader is', a_reader);
+	    if (a_reader) {
+		res.render('pages/un-lecteur-get',
+			   {
+			       un_lecteur : a_reader,
+			       title_tag: "Un lecteur",
+			       title_page: "Les coordonnées d'un lecteur"
+			   }
+			  )
+		// res.end ();
+	    }
+	    else {
+		res.send('Le lecteur de pseudo '+ req.body.pseudoLecteur + ' n\'existe pas dans la base de données <br><br><a href="/">Retour a l\'accueil</a>');
+	    }
 	}
     ).catch(
 	(error) => {
-	    res.status(400).json({
+	    res.status(404).json({
 		error: error
 	    });
 	}

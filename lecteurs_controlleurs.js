@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 
 const bodyParser = require('body-parser');
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -24,6 +25,7 @@ const Db_Promise = mongoose.connect(db_config.DB_URI, { useNewUrlParser: true })
 
 const lecteurRoutes = require('./backend/routes/lecteur.routes')
 const router = require('./backend/routes/lecteur.routes')
+
 // route middleware that will happen on every request
 router.use(function(req, res, next) {
     console.log('la méthode du middleware est ',req.method, 'son url est', req.url);
