@@ -30,7 +30,73 @@ exports.getOneReader = (req, res, next) => {
 	pseudoLecteur: pseudo
     }).then(
 	(a_reader) => {
-	    console.log('1 a_reader is', a_reader);
+	    console.log('a_reader is', a_reader);
+	    if (a_reader) {
+		res.render('pages/un-lecteur-get',
+			   {
+			       un_lecteur : a_reader,
+			       title_tag: "Un lecteur",
+			       title_page: "Les coordonnées d'un lecteur"
+			   }
+			  )
+		// res.end ();
+	    }
+	    else {
+		res.send('Le lecteur de pseudo '+ req.body.pseudoLecteur + ' n\'existe pas dans la base de données <br><br><a href="/">Retour a l\'accueil</a>');
+	    }
+	}
+    ).catch(
+	(error) => {
+	    res.status(404).json({
+		error: error
+	    });
+	}
+    );
+};
+
+exports.displayByIdReader = (req, res, next) => {
+    const id = req.params.id;
+    console.log('displayByIdReader req.params est ', req.params);
+    console.log('displayByIdReader Le id est ', id, '!');
+    
+    lecteurModel.findOne({
+	_id: id
+    }).then(
+	(a_reader) => {
+	    console.log('a_reader is', a_reader);
+	    if (a_reader) {
+		res.render('pages/un-lecteur-get',
+			   {
+			       un_lecteur : a_reader,
+			       title_tag: "Un lecteur",
+			       title_page: "Les coordonnées d'un lecteur"
+			   }
+			  )
+		// res.end ();
+	    }
+	    else {
+		res.send('Le lecteur de pseudo '+ req.body.pseudoLecteur + ' n\'existe pas dans la base de données <br><br><a href="/">Retour a l\'accueil</a>');
+	    }
+	}
+    ).catch(
+	(error) => {
+	    res.status(404).json({
+		error: error
+	    });
+	}
+    );
+};
+
+exports.displayByPseudoReader = (req, res, next) => {
+    const pseudo = req.body.pseudoLecteur;
+    console.log('displayByPseudoReader req.body est ', req.body);
+    console.log('displayByPseudoReader Le pseudo est ', pseudo, '!');
+    
+    lecteurModel.findOne({
+	pseudoLecteur: pseudo
+    }).then(
+	(a_reader) => {
+	    console.log('a_reader is', a_reader);
 	    if (a_reader) {
 		res.render('pages/un-lecteur-get',
 			   {
@@ -58,6 +124,7 @@ exports.deleteByPseudoReader = (req, res, next) => {
     const pseudo = req.body.pseudoLecteur;
     console.log('deleteByPseudoReader req.body est ', req.body);
     console.log('deleteByPseudoReader Le pseudo est ', pseudo, '!');
+
     lecteurModel.deleteOne({
 	pseudoLecteur: pseudo
     }).then(
