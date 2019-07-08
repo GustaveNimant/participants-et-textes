@@ -9,6 +9,15 @@
 	<ul>
 	    <% livres.forEach(function (un_livre) {%>
 		<li><%= un_livre.titreLivre %> par <%= un_livre.auteurLivre %></li>
+
+		<a href="/livre-affichage-par-id/<%= un_livre._id %>">
+		    Afficher
+		</a>
+		<br>
+		<a href="/livre-suppression-par-id/<%= un_livre._id %>">
+		    Supprimer
+		</a>
+
 	    <% }); %>
 	</ul>
     </body>
