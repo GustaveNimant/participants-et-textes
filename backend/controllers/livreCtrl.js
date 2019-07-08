@@ -23,11 +23,15 @@ exports.getABook = (req, res, next) => {
     
 exports.getOneBook = (req, res, next) => {
     const title = req.body.titleLivre;
+    const author = req.body.auteurLivre;
+
     console.log('getOneBook req.body est ', req.body);
-    console.log('getOneBook Le title est ', title, '!');
+    console.log('getOneBook Le title est ', title);
+    console.log('getOneBook Le author est ', author);
     
-    livreModel.findOne({
-	titleLivre: title
+    livreModel.findOne({ /* A CORRIGER */
+	titleLivre: title,
+	auteurLivre: author
     }).then(
 	(a_reader) => {
 	    console.log('a_reader is', a_reader);
@@ -42,7 +46,7 @@ exports.getOneBook = (req, res, next) => {
 		// res.end ();
 	    }
 	    else {
-		res.send('Le livre de title '+ req.body.titleLivre + ' n\'existe pas dans la base de données <br><br><a href="/">Retour a l\'accueil</a>');
+		res.send('Le livre de title '+ title + ' et d\'author ' + author + ' n\'existe pas dans la base de données <br><br><a href="/">Retour a l\'accueil</a>');
 	    }
 	}
     ).catch(
