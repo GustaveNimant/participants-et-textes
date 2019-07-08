@@ -54,13 +54,37 @@ exports.getOneReader = (req, res, next) => {
     );
 };
 
-exports.deleteLecteur = (req, res, next) => {
+exports.deleteByPseudoReader = (req, res, next) => {
+    const pseudo = req.body.pseudoLecteur;
+    console.log('deleteByPseudoReader req.body est ', req.body);
+    console.log('deleteByPseudoReader Le pseudo est ', pseudo, '!');
     lecteurModel.deleteOne({
 	pseudoLecteur: pseudo
     }).then(
 	() => {
 	    res.status(200).json({
 		message: 'Le lecteur de pseudo ' + pseudo + ' a été supprimé'
+	    });
+	}
+    ).catch(
+	(error) => {
+		res.status(400).json({
+		    error: error
+		});
+	}
+    );
+};
+
+exports.deleteByIdReader = (req, res, next) => {
+    const id = req.body._id;
+    console.log('deleteByIdReader req.body est ', req.body);
+    console.log('deleteByIdReader Le id est ', id, '!');
+    lecteurModel.deleteOne({
+	_id: id
+    }).then(
+	() => {
+	    res.status(200).json({
+		message: 'Le lecteur de id ' + id + ' a été supprimé'
 	    });
 	}
     ).catch(

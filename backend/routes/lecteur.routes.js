@@ -15,6 +15,8 @@ router.use(function(req, res, next) {
 router.get ('/', lecteurCtrl.mainMenu);
 router.get('/Les-lecteurs', lecteurCtrl.getAllReader);
 router.get('/Un-lecteur', lecteurCtrl.getAReader);
+router.post('/lecteur-suppression-par-id', lecteurCtrl.deleteByIdReader);
+router.post('/lecteur-suppression-par-pseudo', lecteurCtrl.deleteByPseudoReader);
 router.post('/Un-lecteur-post', lecteurCtrl.getOneReader);
 router.post('/nouveau-lecteur', lecteurCtrl.createReader);
 
