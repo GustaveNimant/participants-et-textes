@@ -1,4 +1,6 @@
 const express = require('express');
+
+// create an instance of the Router 
 const router = express.Router();
 
 const lecteurCtrl = require('../controllers/lecteurCtrl');
@@ -9,6 +11,7 @@ router.use(function(req, res, next) {
     next(); 
 });
 
+// apply routes to the Router instance.
 router.get ('/', lecteurCtrl.mainMenu);
 router.get('/Les-lecteurs', lecteurCtrl.getAllReader);
 router.get('/Un-lecteur', lecteurCtrl.getAReader);

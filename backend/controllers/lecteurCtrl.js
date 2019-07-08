@@ -54,6 +54,24 @@ exports.getOneReader = (req, res, next) => {
     );
 };
 
+exports.deleteLecteur = (req, res, next) => {
+    lecteurModel.deleteOne({
+	pseudoLecteur: pseudo
+    }).then(
+	() => {
+	    res.status(200).json({
+		message: 'Le lecteur de pseudo ' + pseudo + ' a été supprimé'
+	    });
+	}
+    ).catch(
+	(error) => {
+		res.status(400).json({
+		    error: error
+		});
+	}
+    );
+};
+
 exports.getAllReader = (req, res, next) => {
     lecteurModel.find()
 	.then (

@@ -13,7 +13,6 @@ app.set ('view engine', 'ejs');
 
 const Db_Promise = require('./backend/mongo_db');
 
-const lecteurRoutes = require('./backend/routes/lecteur.routes')
 const router = require('./backend/routes/lecteur.routes')
 
 // apply the routes to our application
