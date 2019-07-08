@@ -76,24 +76,21 @@ exports.deleteByPseudoReader = (req, res, next) => {
 };
 
 exports.deleteByIdReader = (req, res, next) => {
-    const id = req.body._id;
-    console.log('deleteByIdReader req.body est ', req.body);
+    const id = req.params.id;
+    console.log('deleteByIdReader req.params est ', req.params);
     console.log('deleteByIdReader Le id est ', id, '!');
     lecteurModel.deleteOne({
 	_id: id
     }).then(
 	() => {
-	    res.status(200).json({
-		message: 'Le lecteur de id ' + id + ' a été supprimé'
-	    });
+	    res.send('Le lecteur d\'id '+ id + ' a été supprimé de la base de données <br><a href="/">Retour a l\'accueil</a>');
 	}
     ).catch(
 	(error) => {
-		res.status(400).json({
-		    error: error
-		});
-	}
-    );
+	    res.status(400).json({
+		error: error
+	    });
+	});
 };
 
 exports.getAllReader = (req, res, next) => {

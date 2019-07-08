@@ -14,10 +14,9 @@
 		    Email
 		    "<%= un_lecteur.emailLecteur %>"
 		</li>
-		<form method="post"
-		      action="/lecteur-suppression-par-pseudo/"
-		    <input type="submit" value"Supprimer">Q
-	        </form>
+		<a href="/lecteur-suppression-par-id/<%= un_lecteur._id %>">
+		    Supprimer
+		</a>
 
 	    <% }); %>
 	</ul>
