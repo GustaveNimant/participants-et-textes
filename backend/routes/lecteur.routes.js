@@ -12,7 +12,7 @@ router.use(function(req, res, next) {
 });
 
 // apply routes to the Router instance.
-router.get ('/', lecteurCtrl.mainMenu);
+router.get('/', lecteurCtrl.mainMenu);
 router.get('/Les-lecteurs', lecteurCtrl.getAllReader);
 router.get('/Un-lecteur', lecteurCtrl.getAReader);
 router.get('/lecteur-affichage-par-id/:id', lecteurCtrl.displayByIdReader);
