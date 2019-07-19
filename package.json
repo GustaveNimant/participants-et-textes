@@ -1,5 +1,5 @@
 {
-  "name": "lecteurs-et-livres",
+  "name": "participants-et-textes",
   "version": "1.0.0",
   "description": "Node demonstration showing how to store data into a MongoDB database",
   "main": "app.js",
@@ -10,7 +10,7 @@
     "node",
     "mongodn",
     "mongoose",
-    "lecteurs-et-livres"
+    "participants-et-textes"
   ],
   "author": "Emile Achadde",
   "license": "ISC",

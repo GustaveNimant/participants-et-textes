@@ -7,14 +7,14 @@
     <body>
         <h1><%= title_page %></h1>
 	<ul>
-	    <% livres.forEach(function (un_livre) {%>
-		<li><%= un_livre.titreLivre %> par <%= un_livre.auteurLivre %></li>
+	    <% textes.forEach(function (un_texte) {%>
+		<li><%= un_texte.titreTexte %> par <%= un_texte.auteurTexte %></li>
 
-		<a href="/livre-affichage-par-id/<%= un_livre._id %>">
+		<a href="/texte-affichage-par-id/<%= un_texte._id %>">
 		    Afficher
 		</a>
 		<br>
-		<a href="/livre-suppression-par-id/<%= un_livre._id %>">
+		<a href="/texte-suppression-par-id/<%= un_texte._id %>">
 		    Supprimer
 		</a>
 

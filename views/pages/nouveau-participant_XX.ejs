@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Nouveau participants</title>
+    </head>
+    
+    <body>
+        <h1>Nouveau participants</h1>
+        <form method="post" action="/xxnouveau-participant">
+            <table>
+		<tr>
+		    <td>Adresse mail : </td>
+		    <td><input type="text" name="emailParticipant" placeholder="Adresse mail" required></td>
+		</tr>
+		<tr>
+		    <td>Choisissez un pseudo : </td>
+		    <td><input type="text" name="pseudoParticipant" placeholder="Pseudo" required></td>
+		</tr>
+		<tr>
+		    <td>Choisissez un mot de passe : </td>
+		    <td><input type="passwordParticipant" size="10" name="password" placeholder="Password" required>
+		    </td>
+		</tr>
+		<tr>
+		    <td COLSPAN="2" align="middle">
+			<input type="submit" value="Inscrire">
+		    </td>
+		</tr>
+	    </table>
+        </form>
+    </body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><%= title_tag %></title>
+    </head>
+
+    <body>
+        <h1><%= title_page %></h1>
+	<ul>
+	    <% participants.forEach(function (un_participant) {%>
+		<li>
+		    Pseudo 
+		    "<%= un_participant.pseudoParticipant %>"
+		    Email
+		    "<%= un_participant.emailParticipant %>"
+		</li>
+		
+		<a href="/participants-affichage-par-id/<%= un_participant._id %>">
+		    Afficher
+		</a>
+		<br>
+		<a href="/participants-suppression-par-id/<%= un_participant._id %>">
+		    Supprimer
+		</a>
+
+	    <% }); %>
+	</ul>
+    </body>
+</html>

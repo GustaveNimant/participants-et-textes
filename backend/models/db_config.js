@@ -1,4 +1,4 @@
-const db_name = "lecteurs-et-livres-db";
+const db_name = "participants-et-textes-db";
 const db_port = 27017;
 
 module.exports = {

@@ -1,36 +1,36 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Bibliothèque</title>
+        <title>ParticipantsEtTextes</title>
     </head>
 
     <body>
-	<h1>Les lecteurs</h1>
+	<h1>Les participants</h1>
 	<ul>	
-	    <li><a href="Un-lecteur">Un lecteur</a></li>
-	    <li><a href="Les-lecteurs">La liste des lecteurs</a></li>
+	    <li><a href="Un-participant">Un participant</a></li>
+	    <li><a href="Les-participants">La liste des participants</a></li>
 	</ul>
 
-	<h3>Entrer un nouveau lecteur</h3>
+	<h3>Entrer un nouveau participants</h3>
 
-        <form method="post" action="/nouveau-lecteur">
-            <input type="text" name="pseudoLecteur" placeholder="Entrer le pseudo ..." required>
-            <input type="text" name="emailLecteur" placeholder="Entrer l'adresse mail ..." required>
-	    <input type="text" name="passwordLecteur" placeholder="Entrer le mot de passe ..." required>
+        <form method="post" action="/nouveau-participant">
+            <input type="text" name="pseudoParticipant" placeholder="Entrer le pseudo ..." required>
+            <input type="text" name="emailParticipant" placeholder="Entrer l'adresse mail ..." required>
+	    <input type="text" name="passwordParticipant" placeholder="Entrer le mot de passe ..." required>
             <input type="submit" value="Ajouter">
         </form>
 
-	<h1>Les livres</h1>
+	<h1>Les textes</h1>
 	<ul>	
-	    <li><a href="Un-livre">Un livre</a></li>
-	    <li><a href="Les-livres">La liste des livres</a></li>
+	    <li><a href="Un-texte">Un texte</a></li>
+	    <li><a href="Les-textes">La liste des textes</a></li>
 	</ul>
 
-	<h3>Entrer un nouveau livre</h3>
+	<h3>Entrer un nouveau texte</h3>
 
-        <form method="post" action="/nouveau-livre">
-            <input type="text" name="titreLivre" placeholder="Entrer le titre..." required>
-            <input type="text" name="auteurLivre" placeholder="Entrer l'auteur..." required>
+        <form method="post" action="/nouveau-texte">
+            <input type="text" name="titreTexte" placeholder="Entrer le titre..." required>
+            <input type="text" name="auteurTexte" placeholder="Entrer l'auteur..." required>
             <input type="submit" value="Ajouter">
         </form>
 

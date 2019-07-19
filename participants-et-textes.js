@@ -9,15 +9,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.set ('view engine', 'ejs');
 
-const lecteur_router = require('./backend/routes/lecteur.routes')
+const participant_router = require('./backend/routes/participant.routes')
 
 // apply the routes to our application
-app.use('/', lecteur_router);
+app.use('/', participant_router);
 
-const livre_router = require('./backend/routes/livre.routes')
+const texte_router = require('./backend/routes/texte.routes')
 
 // apply the routes to our application
-app.use('/', livre_router);
+app.use('/', texte_router);
 
 // Mongo_db
 const Db_Promise = require('./backend/mongo_db');
