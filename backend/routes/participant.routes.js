@@ -7,7 +7,7 @@ const participantCtrl = require('../controllers/participantCtrl');
 
 // route middleware that will happen on every request
 router.use(function(req, res, next) {
-    console.log('la méthode du middleware est ',req.method, 'son url est', req.url);
+    console.log('Dans participant.routes.js la méthode du middleware est ',req.method, 'son url est', req.url);
     next(); 
 });
 

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title><%= title_tag %></title>
+        <title><%= pseudo_tag %></title>
     </head>
 
     <body>
-        <h1><%= title_page %></h1>
+        <h1><%= pseudo_page %></h1>
 	<ul>
 	    <% participants.forEach(function (un_participant) {%>
 		<li>
@@ -15,11 +15,11 @@
 		    "<%= un_participant.emailParticipant %>"
 		</li>
 		
-		<a href="/participants-affichage-par-id/<%= un_participant._id %>">
+		<a href="/participant-affichage-par-id/<%= un_participant._id %>">
 		    Afficher
 		</a>
 		<br>
-		<a href="/participants-suppression-par-id/<%= un_participant._id %>">
+		<a href="/participant-suppression-par-id/<%= un_participant._id %>">
 		    Supprimer
 		</a>
 

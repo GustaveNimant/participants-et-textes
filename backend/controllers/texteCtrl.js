@@ -5,21 +5,21 @@ exports.mainMenu = (req, res) => {
 };
 
 exports.createText = (req, res, next) => {
-    console.log('Entrée dans le controller createText avec req.body', req.body);
+    console.log('Entrée dans createText avec req.body', req.body);
 
     var nouveauTexte = new texteModel(req.body);
-    console.log('nouveauTexte', nouveauTexte);
+    console.log('Dans createText nouveauTexte est', nouveauTexte);
     nouveauTexte.save()
         .then(item => {
 	    res.send('Le texte de titre '+ req.body.titreTexte + ' et d\'auteur ' + req.body.auteurTexte + ' a été enregistré dans la base de données <br><a href="/">Retour a l\'accueil</a>');
         })
         .catch(err => {
-	    res.status(400).send("Impossible d'enregistrer le texte ', req.body.pseudoTexte,' dans la base de données");
+	    res.status(400).send("Impossible d'enregistrer le texte ', req.body.titleTexte,' dans la base de données");
         });
 };
 
 exports.getAText = (req, res, next) => { 
-    console.log('/Un-texte req.body est ', req.body);
+    console.log('Dans getAText req.body est ', req.body);
     res.render ('pages/un-texte-post');
 };
     
@@ -27,20 +27,20 @@ exports.getOneText = (req, res, next) => {
     const title = req.body.titleTexte;
     const author = req.body.auteurTexte;
 
-    console.log('getOneText req.body est ', req.body);
-    console.log('getOneText Le title est ', title);
-    console.log('getOneText Le author est ', author);
+    console.log('Dans getOneText req.body est ', req.body);
+    console.log('Dans getOneText Le title est ', title);
+    console.log('Dans getOneText Le author est ', author);
     
     texteModel.findOne({ /* A CORRIGER */
 	titleTexte: title,
 	auteurTexte: author
     }).then(
-	(a_user) => {
-	    console.log('a_user is', a_user);
-	    if (a_user) {
+	(a_text) => {
+	    console.log('a_text is', a_text);
+	    if (a_text) {
 		res.render('pages/un-texte-get',
 			   {
-			       un_texte : a_user,
+			       un_texte : a_text,
 			       title_tag: "Un texte",
 			       title_page: "Les coordonnées d'un texte"
 			   }
@@ -62,18 +62,18 @@ exports.getOneText = (req, res, next) => {
 
 exports.displayByIdText = (req, res, next) => {
     const id = req.params.id;
-    console.log('displayByIdText req.params est ', req.params);
-    console.log('displayByIdText Le id est ', id, '!');
+    console.log('Dans displayByIdText req.params est ', req.params);
+    console.log('Dans displayByIdText Le id est ', id, '!');
     
     texteModel.findOne({
 	_id: id
     }).then(
-	(a_user) => {
-	    console.log('a_user is', a_user);
-	    if (a_user) {
+	(a_text) => {
+	    console.log('Dans displayByIdText a_text is', a_text);
+	    if (a_text) {
 		res.render('pages/un-texte-get',
 			   {
-			       un_texte : a_user,
+			       un_texte : a_text,
 			       title_tag: "Un texte",
 			       title_page: "Les coordonnées d'un texte"
 			   }
@@ -101,12 +101,12 @@ exports.displayByTitleText = (req, res, next) => {
     texteModel.findOne({
 	titleTexte: title
     }).then(
-	(a_user) => {
-	    console.log('a_user is', a_user);
-	    if (a_user) {
+	(a_text) => {
+	    console.log('a_text is', a_text);
+	    if (a_text) {
 		res.render('pages/un-texte-get',
 			   {
-			       un_texte : a_user,
+			       un_texte : a_text,
 			       title_tag: "Un texte",
 			       title_page: "Les coordonnées d'un texte"
 			   }

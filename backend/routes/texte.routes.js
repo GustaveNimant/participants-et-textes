@@ -7,12 +7,12 @@ const texteCtrl = require('../controllers/texteCtrl');
 
 // route middleware that will happen on every request
 router.use(function(req, res, next) {
-    console.log('la méthode du middleware est ',req.method, 'son url est', req.url);
+    console.log('Dans texte.routes.js la méthode du middleware est ',req.method, 'son url est', req.url);
     next(); 
 });
 
 // apply routes to the Router instance.
-router.get ('/', texteCtrl.mainMenu);
+router.get('/', texteCtrl.mainMenu);
 router.get('/Les-textes', texteCtrl.getAllText);
 router.get('/Un-texte', texteCtrl.getAText);
 router.get('/texte-affichage-par-id/:id', texteCtrl.displayByIdText);
